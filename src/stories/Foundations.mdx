@@ -1,0 +1,124 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+import { CssVarValue } from './foundations/CssVarValue';
+import { ThemeToggle } from './foundations/ThemeToggle';
+import {
+  colorTokens,
+  chartTokens,
+  sidebarTokens,
+  fontTokens,
+  radiusTokens,
+  shadowTokens,
+  spacingTokens,
+} from './foundations/tokens';
+
+<Meta title="Foundations" />
+
+# Foundations
+
+Design tokens defined in `src/index.css`. Every swatch below reads its value live from CSS
+custom properties, so this page always reflects the current tokens — light and dark.
+
+<ThemeToggle />
+
+## Color
+
+Semantic tokens consumed via Tailwind utilities (`bg-primary`, `text-foreground`, etc.).
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
+  {colorTokens.map((token) => (
+    <div key={token.name} className="overflow-hidden rounded-lg border border-border">
+      <div className={`flex h-16 items-end p-2 ${token.bg} ${token.fg}`}>
+        <span className="text-xs font-medium">Aa</span>
+      </div>
+      <div className="space-y-0.5 bg-card p-2">
+        <div className="text-sm font-medium text-card-foreground">{token.label}</div>
+        <CssVarValue name={`--${token.name}`} />
+      </div>
+    </div>
+  ))}
+</div>
+
+### Chart
+
+<div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
+  {chartTokens.map((token) => (
+    <div key={token.name} className="flex-1 overflow-hidden rounded-lg border border-border">
+      <div className={`h-12 ${token.bg}`} />
+      <div className="space-y-0.5 bg-card p-2">
+        <div className="text-sm font-medium text-card-foreground">{token.name}</div>
+        <CssVarValue name={`--${token.name}`} />
+      </div>
+    </div>
+  ))}
+</div>
+
+### Sidebar
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
+  {sidebarTokens.map((token) => (
+    <div key={token.name} className="overflow-hidden rounded-lg border border-border">
+      <div className={`flex h-16 items-end p-2 ${token.bg} ${token.fg}`}>
+        <span className="text-xs font-medium">Aa</span>
+      </div>
+      <div className="space-y-0.5 bg-card p-2">
+        <div className="text-sm font-medium text-card-foreground">{token.label}</div>
+        <CssVarValue name={`--${token.name}`} />
+      </div>
+    </div>
+  ))}
+</div>
+
+## Typography
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+  {fontTokens.map((token) => (
+    <div key={token.name} className="rounded-lg border border-border bg-card p-4">
+      <div className="mb-1 flex items-baseline justify-between">
+        <span className="text-sm font-medium text-card-foreground">{token.label}</span>
+        <CssVarValue name={token.name} />
+      </div>
+      <p className={`${token.className} text-2xl text-card-foreground`}>
+        The quick brown fox jumps over the lazy dog
+      </p>
+    </div>
+  ))}
+</div>
+
+## Radius
+
+<div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+  {radiusTokens.map((token) => (
+    <div key={token.name} className="flex flex-col items-center gap-2">
+      <div className={`size-16 border-2 border-primary bg-muted ${token.className}`} />
+      <div className="text-center">
+        <div className="text-sm font-medium text-foreground">{token.label}</div>
+        <CssVarValue name={token.name} />
+      </div>
+    </div>
+  ))}
+</div>
+
+## Shadow
+
+<div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+  {shadowTokens.map((token) => (
+    <div key={token.className} className="flex flex-col items-center gap-2">
+      <div className={`size-16 rounded-lg bg-card ${token.className}`} />
+      <div className="text-sm font-medium text-foreground">{token.label}</div>
+    </div>
+  ))}
+</div>
+
+## Spacing
+
+Base unit <CssVarValue name="--spacing" /> (Tailwind's `4` = `--spacing * 4`).
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '1rem' }}>
+  {spacingTokens.map((step) => (
+    <div key={step} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+      <span className="w-6 text-right text-xs text-muted-foreground">{step}</span>
+      <div className={`h-4 bg-primary`} style={{ width: `calc(var(--spacing) * ${step})` }} />
+    </div>
+  ))}
+</div>
