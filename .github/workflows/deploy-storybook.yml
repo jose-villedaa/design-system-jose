@@ -24,6 +24,8 @@ jobs:
           bun-version: latest
       - run: bun install --frozen-lockfile
       - run: bun run build-storybook
+      # Prevent Jekyll from ignoring Storybook assets on GitHub Pages
+      - run: touch storybook-static/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
